@@ -2,11 +2,10 @@ package com.macnonline.springWithJWT.security;
 
 import com.macnonline.springWithJWT.entity.Users;
 import com.macnonline.springWithJWT.service.CustomUsersDetailsService;
-import org.apache.tomcat.util.descriptor.web.ContextHandler;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;

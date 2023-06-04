@@ -5,6 +5,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -20,7 +21,7 @@ public class Users implements UserDetails {
     @JoinTable(name = "users_erole",
             joinColumns = @JoinColumn(name = "users_id"),
             inverseJoinColumns = @JoinColumn(name = "erole_id"))
-    private List<ERole> roles;
+    private List<ERole> roles=new ArrayList<>();
     @Transient
     private Collection<? extends GrantedAuthority> authorities;
 
@@ -69,4 +70,6 @@ public class Users implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+
 }
