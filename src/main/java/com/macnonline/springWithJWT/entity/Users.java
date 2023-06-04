@@ -1,13 +1,12 @@
 package com.macnonline.springWithJWT.entity;
 
+import com.macnonline.springWithJWT.entity.enam.ERole;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 @Data
 @Entity
@@ -17,11 +16,10 @@ public class Users implements UserDetails {
     private Long id;
     private String username;
     private String password;
-    @ManyToMany
-    @JoinTable(name = "users_erole",
-            joinColumns = @JoinColumn(name = "users_id"),
-            inverseJoinColumns = @JoinColumn(name = "erole_id"))
-    private List<ERole> roles=new ArrayList<>();
+    @ElementCollection(targetClass = ERole.class)
+    @CollectionTable(name = "users_role",
+            joinColumns = @JoinColumn(name = "users_id"))
+    private Set<ERole> role = new HashSet<>();
     @Transient
     private Collection<? extends GrantedAuthority> authorities;
 
@@ -30,12 +28,12 @@ public class Users implements UserDetails {
 
 
     public Users(Long id, String username, String password,
-                 List<ERole> roles,
+                 Set<ERole> role,
                  Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
         this.username = username;
         this.password = password;
-        this.roles = roles;
+        this.role = role;
         this.authorities = authorities;
     }
 

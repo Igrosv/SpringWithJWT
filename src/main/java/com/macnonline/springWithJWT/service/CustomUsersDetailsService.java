@@ -31,15 +31,15 @@ public class CustomUsersDetailsService implements UserDetailsService {
     }
 
     private UserDetails userBuild(Users user) {
-        List<?extends GrantedAuthority>authorities=user.getRoles()
+        List<?extends GrantedAuthority>authorities=user.getRole()
                 .stream()
-                .map(r->new SimpleGrantedAuthority(r.getRole()))
+                .map(r->new SimpleGrantedAuthority(r.getDeclaringClass().getName()))
                 .collect(Collectors.toList());
        return new Users(
                 user.getId(),
                 user.getUsername(),
                 user.getPassword(),
-                user.getRoles(),
+                user.getRole(),
                 authorities
         );
 
